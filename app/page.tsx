@@ -6,8 +6,8 @@ const navigation = [
   ['Beranda', '#beranda'],
   ['Tentang', '#tentang'],
   ['Menginap', '#menginap'],
-  ['Sekitar', '#sekitar'],
-  ['Galeri', '#galeri'],
+  ['Sekitar', '/sekitar'],
+  ['Galeri', '/galeri'],
   ['Lokasi', '#lokasi'],
   ['Kontak', '#kontak'],
 ]
