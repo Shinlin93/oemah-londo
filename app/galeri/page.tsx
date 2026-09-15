@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 const images = [
-  ['Tampak depan Kadoya House', '/kadoya-2.png', 'Arsitektur'],
-  ['Rumah di antara pepohonan', '/kadoya-1.png', 'Lanskap'],
-  ['Detail rumah dan taman', '/kadoya-2.png', 'Suasana'],
-  ['Sore di teras Kadoya', '/kadoya-1.png', 'Momen'],
+  ['Teras depan Kadoya House', '/teras-rumah.jpeg', 'Arsitektur'],
+  ['Taman dan beranda kolonial', '/teras-rumah-2.jpeg', 'Lanskap'],
+  ['Rumah kolonial tampak luar', '/rumah-hero.webp', 'Suasana'],
+  ['Lorong interior bersejarah', '/rumah-dalam.jpeg', 'Momen'],
 ]
 
 export default function GaleriPage() {
