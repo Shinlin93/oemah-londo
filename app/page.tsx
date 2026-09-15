@@ -11,16 +11,16 @@ const navigation = [
 ]
 
 const gallery = [
-  { title: 'Massa dan cahaya', tone: 'clay', size: 'large' },
-  { title: 'Ruang yang bernapas', tone: 'forest', size: 'small' },
-  { title: 'Di antara pepohonan', tone: 'stone', size: 'small' },
-  { title: 'Detail material', tone: 'charcoal', size: 'wide' },
+  { title: 'Tampak depan Kadoya House', tone: 'clay', size: 'large', image: '/kadoya-2.png' },
+  { title: 'Rumah di antara pepohonan', tone: 'forest', size: 'small', image: '/kadoya-1.png' },
+  { title: 'Di antara pepohonan', tone: 'stone', size: 'small', image: '/kadoya-2.png' },
+  { title: 'Detail material dan lanskap', tone: 'charcoal', size: 'wide', image: '/kadoya-1.png' },
 ]
 
-function VisualBlock({ tone, label }: { tone: string; label: string }) {
+function VisualBlock({ tone, label, image }: { tone: string; label: string; image?: string }) {
   return (
-    <div className={`visual-block visual-${tone}`} role="img" aria-label={label}>
-      <span className="visual-mark" aria-hidden="true">KH</span>
+    <div className={`visual-block visual-${tone}${image ? ' has-image' : ''}`} role="img" aria-label={label} style={image ? { backgroundImage: `url(${image})` } : undefined}>
+      {!image && <span className="visual-mark" aria-hidden="true">KH</span>}
       <span className="visual-caption">{label}</span>
     </div>
   )
@@ -42,7 +42,7 @@ export default function Page() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="#beranda" aria-label="Kadoya House, kembali ke beranda">KADOYA <span>HOUSE</span></a>
+        <a className="wordmark" href="#beranda" aria-label="Kadoya House, kembali ke beranda"><img src="/logo-kadoya.png" alt="Kadoya Hills Claket Pacet" /></a>
         <nav id="main-navigation" className={`site-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Navigasi utama">
           {navigation.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
           <a className="nav-book" href="#reservasi" onClick={() => setMenuOpen(false)}>Rencanakan kunjungan <span aria-hidden="true">→</span></a>
@@ -59,7 +59,7 @@ export default function Page() {
           <p className="hero-intro">Sebuah rumah di antara udara pegunungan, pepohonan, dan waktu yang berjalan lebih pelan.</p>
           <a className="text-link" href="#tentang">Kenali tempat ini <span aria-hidden="true">↓</span></a>
         </div>
-        <div className="hero-art" aria-label="Komposisi abstrak yang merepresentasikan arsitektur Kadoya House" role="img">
+        <div className="hero-art hero-photo" aria-label="Tampak depan Kadoya House di antara pepohonan" role="img">
           <div className="hero-sun" /><div className="hero-house"><span>KADOYA<br />HOUSE</span></div><div className="hero-tree tree-one" /><div className="hero-tree tree-two" />
           <div className="hero-label">01 — A house<br />between green</div>
         </div>
@@ -72,7 +72,7 @@ export default function Page() {
           <h2>Datang untuk<br /><span>berhenti.</span></h2>
           <div className="intro-side"><p>Kadoya House adalah jeda yang memiliki bentuk. Tempat untuk membuka jendela, mendengar angin, dan membiarkan hari menemukan ritmenya sendiri.</p><a className="text-link" href="#menginap">Tentang pengalaman menginap <span aria-hidden="true">→</span></a></div>
         </div>
-        <div className="intro-visual"><VisualBlock tone="forest" label="A sense of place" /><p>Arsitektur yang tidak bersaing dengan lanskapnya.</p></div>
+        <div className="intro-visual"><VisualBlock tone="forest" label="A sense of place" image="/kadoya-1.png" /><p>Arsitektur yang tidak bersaing dengan lanskapnya.</p></div>
       </section>
 
       <section className="stay section-shell dark-section" id="menginap">
@@ -86,7 +86,7 @@ export default function Page() {
 
       <section className="gallery section-shell" id="galeri">
         <div className="gallery-heading"><div><p className="section-number">04 / Galeri</p><h2>Beberapa<br /><em>kemungkinan.</em></h2></div><p>Visual properti akan hadir di sini setelah aset fotografi resmi tersedia.</p></div>
-        <div className="gallery-grid">{gallery.map((item, index) => <button className={`gallery-item gallery-${item.size}`} key={item.title} type="button" onClick={() => setActiveImage(index)}><VisualBlock tone={item.tone} label={item.title} /></button>)}</div>
+        <div className="gallery-grid">{gallery.map((item, index) => <button className={`gallery-item gallery-${item.size}`} key={item.title} type="button" onClick={() => setActiveImage(index)}><VisualBlock tone={item.tone} label={item.title} image={item.image} /></button>)}</div>
       </section>
 
       <section className="location section-shell" id="lokasi"><div className="location-copy"><p className="section-number">05 / Lokasi</p><h2>Naik sedikit.<br />Tarik napas.</h2><p>Kadoya House berada di kawasan Claket, Pacet, Mojokerto — di mana lanskap mulai menanjak dan udara terasa berubah.</p><span className="location-note">Alamat lengkap dan tautan peta dibagikan saat reservasi.</span></div><div className="map-visual" role="img" aria-label="Ilustrasi abstrak lanskap perbukitan Pacet"><span className="map-label">Pacet<br /><b>Claket</b></span><span className="map-line line-a" /><span className="map-line line-b" /><span className="map-dot" /></div></section>
@@ -95,7 +95,7 @@ export default function Page() {
 
       <footer className="site-footer"><span>© Kadoya House</span><span>Claket / Pacet / Mojokerto</span><a href="#beranda">Kembali ke atas ↑</a></footer>
 
-      {activeImage !== null && <div className="lightbox" role="dialog" aria-modal="true" aria-label={`Galeri, ${gallery[activeImage].title}`} onClick={() => setActiveImage(null)}><button type="button" className="lightbox-close" onClick={() => setActiveImage(null)} aria-label="Tutup galeri">Tutup ×</button><div className="lightbox-art" onClick={(event) => event.stopPropagation()}><VisualBlock tone={gallery[activeImage].tone} label={gallery[activeImage].title} /><p>{gallery[activeImage].title}</p></div></div>}
+      {activeImage !== null && <div className="lightbox" role="dialog" aria-modal="true" aria-label={`Galeri, ${gallery[activeImage].title}`} onClick={() => setActiveImage(null)}><button type="button" className="lightbox-close" onClick={() => setActiveImage(null)} aria-label="Tutup galeri">Tutup ×</button><div className="lightbox-art" onClick={(event) => event.stopPropagation()}><VisualBlock tone={gallery[activeImage].tone} label={gallery[activeImage].title} image={gallery[activeImage].image} /><p>{gallery[activeImage].title}</p></div></div>}
     </main>
   )
 }
