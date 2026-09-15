@@ -19,16 +19,16 @@ const gallery = [
 ]
 
 const stays = [
-  ['Kamar nyaman', 'Ruang istirahat yang tenang untuk melepas lelah setelah menjelajah Pacet.'],
-  ['Ruang berkumpul', 'Area bersama untuk sarapan, berbincang, atau menghabiskan sore.'],
-  ['Dapur & perlengkapan', 'Fasilitas pendukung untuk pengalaman menginap yang terasa seperti di rumah.'],
-  ['Taman dan teras', 'Sudut terbuka untuk menikmati udara sejuk dan suasana rumah bersejarah.'],
+  ['Kamar nyaman', 'Tempat beristirahat setelah seharian berjalan-jalan di Pacet.'],
+  ['Ruang berkumpul', 'Area bersama untuk sarapan, mengobrol, atau duduk santai.'],
+  ['Dapur & perlengkapan', 'Perlengkapan dasar untuk kebutuhan selama menginap.'],
+  ['Taman dan teras', 'Ruang terbuka untuk duduk santai dan menikmati udara sejuk.'],
 ]
 
 const nearby = [
-  ['01', 'Wisata alam', 'Nikmati udara pegunungan, jalur hijau, dan pemandangan khas kawasan Pacet.', 'Jelajah alam'],
-  ['02', 'Kuliner lokal', 'Temukan warung hangat, kopi, dan hidangan rumahan untuk melengkapi perjalanan.', 'Cicipi sekitar'],
-  ['03', 'Aktivitas keluarga', 'Rencanakan waktu santai untuk bermain, berfoto, dan berkumpul bersama orang terdekat.', 'Waktu bersama'],
+  ['01', 'Wisata alam', 'Jalan pagi, lihat pepohonan, dan nikmati udara Pacet.', 'Lihat pilihan'],
+  ['02', 'Kuliner lokal', 'Cari kopi, jagung bakar, atau masakan rumahan di sekitar.', 'Cari tempat makan'],
+  ['03', 'Aktivitas keluarga', 'Luangkan waktu untuk bermain, berfoto, atau duduk bersama.', 'Pilih kegiatan'],
 ]
 
 export default function Page() {
@@ -55,16 +55,16 @@ export default function Page() {
 
       <section className="reference-hero" id="beranda">
         <div className="hero-backdrop" aria-label="Rumah kolonial Kadoya House dengan atap genteng" role="img" /><div className="hero-wash" />
-        <div className="hero-copy"><p className="hero-kicker">Est. 1924 <span aria-hidden="true">—</span></p><h1>Kenyamanan<br />dalam Warisan<br />di Kadoya House</h1><span className="ornament" aria-hidden="true">◇</span><p className="hero-intro">Penginapan bergaya kolonial Belanda yang berdiri sejak tahun 1924 di sejuknya Claket, Pacet.</p><div className="hero-actions"><a className="booking-button" href="#kontak"><span aria-hidden="true">▣</span> Booking sekarang</a><a className="video-button" href="#galeri"><span aria-hidden="true">▶</span> Lihat galeri</a></div></div><p className="hero-scroll">Scroll untuk menjelajah <span aria-hidden="true">↓</span></p>
+        <div className="hero-copy"><p className="hero-kicker">Est. 1924 <span aria-hidden="true">—</span></p><h1>Kenyamanan<br />dalam Warisan<br />di Kadoya House</h1><span className="ornament" aria-hidden="true">◇</span><p className="hero-intro">Rumah bergaya kolonial Belanda di Claket, Pacet, untuk beristirahat dengan tenang.</p><div className="hero-actions"><a className="booking-button" href="#kontak"><span aria-hidden="true">▣</span> Booking sekarang</a><a className="video-button" href="#galeri"><span aria-hidden="true">▶</span> Lihat galeri</a></div></div><p className="hero-scroll">Scroll untuk menjelajah <span aria-hidden="true">↓</span></p>
       </section>
 
-      <section className="about section-shell" id="tentang"><div className="about-image"><img src="/rumah-hero.webp" alt="Bangunan rumah kolonial dengan atap genteng merah dan taman" /></div><div className="about-copy"><p className="eyebrow">Tentang Kadoya House</p><h2>Warisan Kolonial,<br /><em>Kenangan yang Hidup</em></h2><span className="ornament" aria-hidden="true">◇</span><p>Kadoya House adalah rumah peninggalan era kolonial Belanda yang telah berdiri sejak tahun 1924. Terletak di kawasan sejuk Claket, Pacet, tempat ini menawarkan suasana tenang, udara segar, dan pengalaman menginap yang berbeda.</p><a className="outline-button" href="#menginap">Lihat fasilitas <span aria-hidden="true">→</span></a></div></section>
+      <section className="about section-shell" id="tentang"><div className="about-image"><img src="/rumah-hero.webp" alt="Bangunan rumah kolonial dengan atap genteng merah dan taman" /></div><div className="about-copy"><p className="eyebrow">Tentang Kadoya House</p><h2>Warisan Kolonial,<br /><em>Kenangan yang Hidup</em></h2><span className="ornament" aria-hidden="true">◇</span><p>Kadoya House berada di Claket, Pacet, dalam rumah bergaya kolonial Belanda. Datang untuk beristirahat, menikmati udara sejuk, dan menghabiskan waktu bersama orang terdekat.</p><a className="outline-button" href="#menginap">Lihat fasilitas <span aria-hidden="true">→</span></a></div></section>
 
       <section className="stats section-shell" aria-label="Kadoya House dalam angka"><div><strong>1924</strong><span>Tahun Berdiri</span></div><div><strong>700</strong><span>MDPL Ketinggian</span></div><div><strong>8</strong><span>Kamar Nyaman</span></div><div><strong>50+</strong><span>Tamu Puas</span></div></section>
 
       <section className="stay section-shell" id="menginap"><div className="section-heading"><div><p className="eyebrow">Menginap di Kadoya</p><h2>Ruang untuk<br /><em>berhenti sejenak.</em></h2></div><p>Fasilitas berikut adalah gambaran awal pengalaman menginap di Kadoya House.</p></div><div className="stay-list">{stays.map(([title, text], index) => <article key={title}><span>0{index + 1}</span><div><h3>{title}</h3><p>{text}</p></div><b aria-hidden="true">↗</b></article>)}</div></section>
 
-      <section className="around section-shell" id="sekitar"><div className="around-intro"><p className="eyebrow">Sekitar Kadoya</p><h2>Jadikan perjalanan<br /><em>lebih berwarna.</em></h2><p>Selain beristirahat, ada banyak cara sederhana untuk menikmati suasana Claket dan Pacet. Pilih ritme perjalanan yang paling sesuai untukmu.</p></div><div className="nearby-grid">{nearby.map(([number, title, text, link]) => <article key={number}><span className="nearby-number">{number}</span><div><h3>{title}</h3><p>{text}</p><a href="#kontak">{link} <span aria-hidden="true">→</span></a></div></article>)}</div></section>
+      <section className="around section-shell" id="sekitar"><div className="around-intro"><p className="eyebrow">Sekitar Kadoya</p><h2>Jadikan perjalanan<br /><em>lebih berwarna.</em></h2><p>Di luar rumah, kamu bisa mengisi hari dengan jalan-jalan, mencari makanan hangat, atau duduk santai bersama keluarga.</p></div><div className="nearby-grid">{nearby.map(([number, title, text, link]) => <article key={number}><span className="nearby-number">{number}</span><div><h3>{title}</h3><p>{text}</p><a href="#kontak">{link} <span aria-hidden="true">→</span></a></div></article>)}</div></section>
 
       <section className="gallery section-shell" id="galeri"><div className="section-heading"><div><p className="eyebrow">Galeri</p><h2>Beberapa kemungkinan.</h2></div><p>Arsitektur, taman, dan suasana Kadoya House.</p></div><div className="gallery-grid">{gallery.map((item, index) => <button className={`gallery-item gallery-item-${index}`} key={item.title} type="button" onClick={() => setActiveImage(index)}><img src={item.image} alt={item.title} /><span>{item.title} <b aria-hidden="true">↗</b></span></button>)}</div></section>
 
