@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Kadoya House | Claket, Pacet',
+  title: 'Kadoya House — Ruang untuk kembali',
   description: 'Sebuah rumah di antara udara pegunungan, pepohonan, dan waktu yang berjalan lebih pelan di Claket, Pacet, Mojokerto.',
   generator: 'v0.app',
 }
