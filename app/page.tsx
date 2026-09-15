@@ -3,28 +3,27 @@
 import { useEffect, useState } from 'react'
 
 const navigation = [
+  ['Beranda', '#beranda'],
   ['Tentang', '#tentang'],
-  ['Menginap', '#menginap'],
-  ['Pengalaman', '#pengalaman'],
+  ['Fasilitas', '#fasilitas'],
   ['Galeri', '#galeri'],
+  ['Aktivitas', '#aktivitas'],
   ['Lokasi', '#lokasi'],
+  ['Kontak', '#kontak'],
 ]
 
 const gallery = [
-  { title: 'Tampak depan Kadoya House', tone: 'clay', size: 'large', image: '/kadoya-2.png' },
-  { title: 'Rumah di antara pepohonan', tone: 'forest', size: 'small', image: '/kadoya-1.png' },
-  { title: 'Di antara pepohonan', tone: 'stone', size: 'small', image: '/kadoya-2.png' },
-  { title: 'Detail material dan lanskap', tone: 'charcoal', size: 'wide', image: '/kadoya-1.png' },
+  { title: 'Tampak depan Kadoya House', image: '/kadoya-2.png' },
+  { title: 'Rumah di antara pepohonan', image: '/kadoya-1.png' },
+  { title: 'Detail arsitektur dan lanskap', image: '/kadoya-2.png' },
 ]
 
-function VisualBlock({ tone, label, image }: { tone: string; label: string; image?: string }) {
-  return (
-    <div className={`visual-block visual-${tone}${image ? ' has-image' : ''}`} role="img" aria-label={label} style={image ? { backgroundImage: `url(${image})` } : undefined}>
-      {!image && <span className="visual-mark" aria-hidden="true">KH</span>}
-      <span className="visual-caption">{label}</span>
-    </div>
-  )
-}
+const highlights = [
+  ['Bangunan Bersejarah', 'Dibangun tahun 1924 dengan arsitektur kolonial Belanda yang terjaga keasliannya.'],
+  ['Lokasi Sejuk & Asri', 'Berada di dataran tinggi Pacet dengan udara segar dan pemandangan indah.'],
+  ['Cocok untuk Berkumpul', 'Nyaman untuk keluarga, komunitas, atau gathering bersama sahabat.'],
+  ['Fasilitas Lengkap', 'Kamar nyaman, area luas, dapur, ruang santai, dan fasilitas pendukung lainnya.'],
+]
 
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -32,9 +31,7 @@ export default function Page() {
 
   useEffect(() => {
     if (!menuOpen) return
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setMenuOpen(false)
-    }
+    const closeOnEscape = (event: KeyboardEvent) => event.key === 'Escape' && setMenuOpen(false)
     window.addEventListener('keydown', closeOnEscape)
     return () => window.removeEventListener('keydown', closeOnEscape)
   }, [menuOpen])
@@ -42,60 +39,48 @@ export default function Page() {
   return (
     <main>
       <header className="site-header">
-        <a className="wordmark" href="#beranda" aria-label="Kadoya House, kembali ke beranda"><img src="/logo-kadoya.png" alt="Kadoya Hills Claket Pacet" /></a>
+        <a className="wordmark" href="#beranda" aria-label="Kadoya House, kembali ke beranda"><img src="/logo-kadoya.png" alt="Kadoya House Claket Pacet" /></a>
         <nav id="main-navigation" className={`site-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Navigasi utama">
           {navigation.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
-          <a className="nav-book" href="#reservasi" onClick={() => setMenuOpen(false)}>Rencanakan kunjungan <span aria-hidden="true">→</span></a>
         </nav>
-        <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>
-          <span className="sr-only">Buka menu</span>{menuOpen ? 'Tutup' : 'Menu'}
-        </button>
+        <a className="booking-button header-booking" href="#kontak"><span aria-hidden="true">▣</span> Booking sekarang</a>
+        <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}><span className="sr-only">Buka menu</span>{menuOpen ? 'Tutup' : 'Menu'}</button>
       </header>
 
-      <section className="hero section-shell" id="beranda">
+      <section className="reference-hero" id="beranda">
+        <div className="hero-backdrop" aria-label="Kadoya House di antara pepohonan" role="img" />
+        <div className="hero-wash" />
         <div className="hero-copy">
-          <p className="eyebrow"><span className="eyebrow-line" /> Claket / Pacet / Mojokerto</p>
-          <h1>Ruang untuk<br /><em>kembali</em> pada<br />yang esensial.</h1>
-          <p className="hero-intro">Sebuah rumah di antara udara pegunungan, pepohonan, dan waktu yang berjalan lebih pelan.</p>
-          <a className="text-link" href="#tentang">Kenali tempat ini <span aria-hidden="true">↓</span></a>
+          <p className="hero-kicker">Est. 1924 <span aria-hidden="true">—</span></p>
+          <h1>Kenyamanan<br />dalam Warisan<br />di Kadoya House</h1>
+          <span className="ornament" aria-hidden="true">◇</span>
+          <p className="hero-intro">Penginapan bergaya kolonial Belanda yang berdiri sejak tahun 1924 di sejuknya Claket, Pacet.</p>
+          <div className="hero-actions"><a className="booking-button" href="#kontak"><span aria-hidden="true">▣</span> Booking sekarang</a><a className="video-button" href="#galeri"><span aria-hidden="true">▶</span> Lihat galeri</a></div>
         </div>
-        <div className="hero-art hero-photo" aria-label="Tampak depan Kadoya House di antara pepohonan" role="img">
-          <div className="hero-sun" /><div className="hero-house"><span>KADOYA<br />HOUSE</span></div><div className="hero-tree tree-one" /><div className="hero-tree tree-two" />
-          <div className="hero-label">01 — A house<br />between green</div>
-        </div>
-        <div className="hero-meta"><span>01 / 05</span><span>Scroll to explore</span></div>
+        <p className="hero-scroll">Scroll untuk menjelajah <span aria-hidden="true">↓</span></p>
       </section>
 
-      <section className="intro section-shell" id="tentang">
-        <p className="section-number">01 / Tentang</p>
-        <div className="intro-content">
-          <h2>Datang untuk<br /><span>berhenti.</span></h2>
-          <div className="intro-side"><p>Kadoya House adalah jeda yang memiliki bentuk. Tempat untuk membuka jendela, mendengar angin, dan membiarkan hari menemukan ritmenya sendiri.</p><a className="text-link" href="#menginap">Tentang pengalaman menginap <span aria-hidden="true">→</span></a></div>
-        </div>
-        <div className="intro-visual"><VisualBlock tone="forest" label="A sense of place" image="/kadoya-1.png" /><p>Arsitektur yang tidak bersaing dengan lanskapnya.</p></div>
+      <section className="highlight-panel section-shell" id="fasilitas">
+        {highlights.map(([title, text], index) => <article className="highlight-item" key={title}><span className="highlight-icon" aria-hidden="true">{['⌂', '⌁', '●', '▱'][index]}</span><h2>{title}</h2><p>{text}</p></article>)}
       </section>
 
-      <section className="stay section-shell dark-section" id="menginap">
-        <div className="stay-heading"><p className="section-number">02 / Menginap</p><h2>Yang cukup,<br /><em>lebih dari</em> cukup.</h2></div>
-        <div className="stay-details"><p className="large-note">Informasi menginap tersedia melalui kontak langsung.</p><p>Ruang, kapasitas, dan ketersediaan dapat berubah. Kami percaya percakapan yang jujur adalah awal terbaik untuk merencanakan kunjungan.</p><a className="outline-link" href="#reservasi">Tanyakan ketersediaan <span aria-hidden="true">→</span></a></div>
+      <section className="about section-shell" id="tentang">
+        <div className="about-image"><img src="/kadoya-1.png" alt="Bangunan Kadoya House dengan atap genteng dan taman" /></div>
+        <div className="about-copy"><p className="eyebrow">Tentang Kadoya House</p><h2>Warisan Kolonial,<br /><em>Kenangan yang Hidup</em></h2><span className="ornament" aria-hidden="true">◇</span><p>Kadoya House adalah rumah peninggalan era kolonial Belanda yang telah berdiri sejak tahun 1924. Terletak di kawasan sejuk Claket, Pacet, tempat ini menawarkan suasana tenang, udara segar, dan pengalaman menginap yang berbeda.</p><a className="outline-button" href="#aktivitas">Selengkapnya <span aria-hidden="true">→</span></a></div>
       </section>
 
-      <section className="experience section-shell" id="pengalaman">
-        <p className="section-number">03 / Pengalaman</p><div className="experience-grid"><h2>Hari-hari kecil<br />yang terasa <em>penuh.</em></h2><div className="experience-list"><article><span>01</span><div><h3>Pagi yang terbuka</h3><p>Cahaya pertama, udara dingin, dan waktu yang belum perlu diberi nama.</p></div></article><article><span>02</span><div><h3>Ruang untuk berkumpul</h3><p>Tempat berbagi cerita, makan bersama, atau sekadar tidak melakukan apa-apa.</p></div></article><article><span>03</span><div><h3>Dekat dengan alam</h3><p>Lanskap Pacet hadir sebagai latar yang selalu berubah sepanjang hari.</p></div></article></div></div>
-      </section>
+      <section className="stats section-shell" aria-label="Kadoya House dalam angka"><div><strong>1924</strong><span>Tahun Berdiri</span></div><div><strong>700</strong><span>MDPL Ketinggian</span></div><div><strong>8</strong><span>Kamar Nyaman</span></div><div><strong>50+</strong><span>Tamu Puas</span></div></section>
 
-      <section className="gallery section-shell" id="galeri">
-        <div className="gallery-heading"><div><p className="section-number">04 / Galeri</p><h2>Beberapa<br /><em>kemungkinan.</em></h2></div><p>Visual properti akan hadir di sini setelah aset fotografi resmi tersedia.</p></div>
-        <div className="gallery-grid">{gallery.map((item, index) => <button className={`gallery-item gallery-${item.size}`} key={item.title} type="button" onClick={() => setActiveImage(index)}><VisualBlock tone={item.tone} label={item.title} image={item.image} /></button>)}</div>
-      </section>
+      <section className="experience section-shell" id="aktivitas"><div><p className="eyebrow">Nikmati suasananya</p><h2>Hari-hari kecil<br /><em>yang terasa penuh.</em></h2></div><div className="experience-copy"><p>Ruang untuk berkumpul, menikmati udara pegunungan, dan membuat kenangan baru bersama orang-orang terdekat.</p><a className="outline-button" href="#galeri">Lihat galeri <span aria-hidden="true">→</span></a></div></section>
 
-      <section className="location section-shell" id="lokasi"><div className="location-copy"><p className="section-number">05 / Lokasi</p><h2>Naik sedikit.<br />Tarik napas.</h2><p>Kadoya House berada di kawasan Claket, Pacet, Mojokerto — di mana lanskap mulai menanjak dan udara terasa berubah.</p><span className="location-note">Alamat lengkap dan tautan peta dibagikan saat reservasi.</span></div><div className="map-visual" role="img" aria-label="Ilustrasi abstrak lanskap perbukitan Pacet"><span className="map-label">Pacet<br /><b>Claket</b></span><span className="map-line line-a" /><span className="map-line line-b" /><span className="map-dot" /></div></section>
+      <section className="gallery section-shell" id="galeri"><div className="section-heading"><div><p className="eyebrow">Galeri</p><h2>Beberapa kemungkinan.</h2></div><p>Arsitektur, taman, dan suasana Kadoya House.</p></div><div className="gallery-grid">{gallery.map((item, index) => <button className={`gallery-item gallery-item-${index}`} key={item.title} type="button" onClick={() => setActiveImage(index)}><img src={item.image} alt={item.title} /><span>{item.title} <b aria-hidden="true">↗</b></span></button>)}</div></section>
 
-      <section className="booking section-shell" id="reservasi"><p className="section-number">Mulai dari sini</p><h2>Waktu yang lebih<br /><em>berarti.</em></h2><p>Untuk bertanya tentang ketersediaan dan merencanakan kunjungan, hubungi kami secara langsung.</p><a className="booking-link" href="mailto:hello@kadoyahouse.com">Hubungi Kadoya House <span aria-hidden="true">→</span></a></section>
+      <section className="location section-shell" id="lokasi"><div><p className="eyebrow">Lokasi</p><h2>Naik sedikit.<br /><em>Tarik napas.</em></h2><p>Kadoya House berada di Jl. Anggrek IV, Claket, Pacet, Mojokerto — di mana lanskap mulai menanjak dan udara terasa berubah.</p></div><div className="location-card"><img src="/kadoya-2.png" alt="Lingkungan Kadoya House di Claket, Pacet" /><span>Claket<br /><b>Pacet, Jawa Timur</b></span></div></section>
 
-      <footer className="site-footer"><span>© Kadoya House</span><span>Claket / Pacet / Mojokerto</span><a href="#beranda">Kembali ke atas ↑</a></footer>
+      <section className="contact section-shell" id="kontak"><p className="eyebrow">Mulai dari sini</p><h2>Waktu yang lebih<br /><em>berarti.</em></h2><p>Hubungi kami untuk bertanya tentang ketersediaan dan merencanakan kunjungan.</p><a className="booking-button" href="mailto:hello@kadoyahouse.com">Hubungi Kadoya House <span aria-hidden="true">→</span></a></section>
+      <footer className="site-footer"><span>© Kadoya House</span><span>Claket · Pacet · Mojokerto</span><a href="#beranda">Kembali ke atas ↑</a></footer>
 
-      {activeImage !== null && <div className="lightbox" role="dialog" aria-modal="true" aria-label={`Galeri, ${gallery[activeImage].title}`} onClick={() => setActiveImage(null)}><button type="button" className="lightbox-close" onClick={() => setActiveImage(null)} aria-label="Tutup galeri">Tutup ×</button><div className="lightbox-art" onClick={(event) => event.stopPropagation()}><VisualBlock tone={gallery[activeImage].tone} label={gallery[activeImage].title} image={gallery[activeImage].image} /><p>{gallery[activeImage].title}</p></div></div>}
+      {activeImage !== null && <div className="lightbox" role="dialog" aria-modal="true" aria-label={gallery[activeImage].title} onClick={() => setActiveImage(null)}><button type="button" className="lightbox-close" onClick={() => setActiveImage(null)} aria-label="Tutup galeri">Tutup ×</button><img src={gallery[activeImage].image} alt={gallery[activeImage].title} onClick={(event) => event.stopPropagation()} /></div>}
     </main>
   )
 }
